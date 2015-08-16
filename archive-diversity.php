@@ -4,11 +4,12 @@
  * Description: Include Pages, attachments or custom post types in your category, tag, date or author archives.
  * Author: Carlo Manf
  * Author URI: http://carlomanf.id.au
- * Version: 1.0.0
+ * Version: 1.0.1
  */
 
 // Diversify the archives
-add_filter( 'pre_get_posts', function( $query ) {
+add_filter( 'pre_get_posts', 'archive_diversity_diversify' );
+function archive_diversity_diversify( $query ) {
 
 	if ( $query->is_archive() && !$query->is_post_type_archive() && !is_admin() ) {
 		$options = archive_diversity_get_options();
@@ -40,8 +41,9 @@ add_filter( 'pre_get_posts', function( $query ) {
 
 	return $query;
 
-} );
+}
 
+// Settings page
 function archive_diversity_settings() {
 	if ( !empty( $_POST[ 'diversity' ] ) )
 		archive_diversity_process();
@@ -101,10 +103,13 @@ function archive_diversity_settings() {
 
 }
 
-add_action( 'admin_menu', function() {
+// Add options page
+add_action( 'admin_menu', 'archive_diversity_options' );
+function archive_diversity_options() {
 	add_options_page( 'Archive Diversity', 'Archive Diversity', 'manage_options', 'archive_diversity', 'archive_diversity_settings' );
-} );
+}
 
+// Process settings input
 function archive_diversity_process() {
 	$slugs = array( 'category_diversity', 'tag_diversity', 'date_diversity', 'author_diversity' );
 
@@ -120,6 +125,7 @@ function archive_diversity_process() {
 	echo '<div class="updated"><p>Settings saved.</p></div>';
 }
 
+// Retrieve options
 function archive_diversity_get_options() {
 	$defaults = array();
 	$slugs = array( 'category_diversity', 'tag_diversity', 'date_diversity', 'author_diversity' );

@@ -20,3 +20,6 @@ Just go to **Settings > Archive Diversity** in your admin area and fill out the 
 
 = 1.0.0 =
 * Initial release
+
+= 1.0.1 =
+* Add compatibility for older PHP versions
