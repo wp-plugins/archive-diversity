@@ -16,6 +16,10 @@ Why should category, tag, date and author archives be limited to Posts only? If 
 
 Just go to **Settings > Archive Diversity** in your admin area and fill out the table as you desire.
 
+== Screenshots ==
+
+1. Archive Diversity settings page
+
 == Changelog ==
 
 = 1.0.0 =
